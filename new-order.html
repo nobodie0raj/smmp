@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Dashboard - SMMXpert</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      min-height: 100vh;
+      color: #333;
+    }
+
+   .sidebar {
+      width: 230px;
+      background-color: #1e293b;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #38bdf8;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .sidebar ul li {
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 10px;
+      display: block;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar ul li a:hover {
+      background-color: #334155;
+    }
+
+    .main {
+      flex-grow: 1;
+      padding: 30px;
+      background-color: #f9fafb;
+    }
+
+   .card {
+  background-color: white;
+  padding:55px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+}
+
+
+    .card h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+      color: #1e293b;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .submit-btn {
+      background-color: #0ea5e9;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .submit-btn:hover {
+      background-color: #0284c7;
+    }
+
+    @media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    padding: 10px 0;
+    background-color: #1e293b;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .sidebar h2 {
+    font-size: 18px;
+    margin: 0 15px;
+    color: #38bdf8;
+    flex-shrink: 0;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    list-style: none;
+  }
+
+  .sidebar ul li {
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .sidebar ul li a {
+    display: inline-block;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-right: 5px;
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .sidebar ul li a:hover {
+    background-color: #334155;
+  }
+
+  .main {
+    padding: 20px 15px;
+  }
+
+  .card {
+    padding: 25px 15px;
+  }
+
+  .order-slip,
+  .clear-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>SMMXpert</h2>
+    <ul>
+       <li><a href="new-order.html">📦 New Order</a></li>
+      <li><a href="my-orders.html">📊 My Orders</a></li>
+      <li><a href="services.html">🛠️ Services</a></li>
+      <li><a href="register-complaint.html" aria-current="page">⚠️ Register Complaint</a></li>
+    <!--  <li><a href="add-funds.html">💰 Add Funds</a></li> -->
+    </ul>
+  </div>
+
+  <div class="main">
+    <div class="card">
+      <h1>New Order</h1>
+      <form id="serviceForm">
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category"></select>
+        </div>
+        <div class="form-group">
+          <label for="service">Service</label>
+          <select id="service"></select>
+        </div>
+        <div class="form-group">
+          <label for="link">Link</label>
+          <input type="text" id="link" placeholder="Enter link here..." required />
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" placeholder="Enter quantity..." required />
+        </div>
+        <div class="form-group">
+          <label for="charge">Charge</label>
+          <input type="text" id="charge" readonly />
+        </div>
+        <div class="form-group">
+  <label>Scan & Pay via:</label>
+  <img src="qr.png" alt="Pay via QR Code" style="max-width: 300px; display: block; margin: 10px auto;" />
+  <p style="text-align: center; color: #1e293b; font-weight: 500;">
+    Paytm | GPay | FamPay | BharatPe | BHIM UPI<br>
+    <small style="color: #64748b;">(All-in-one QR – Just Pay and click submit button to verify )</small>
+  </p>
+</div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+   const services = {
+      instagram_likes: [
+        { name: "Instagram Likes | HQ & Old Accounts | No Refill | 200K/DAY", rate: 12.98 },
+        { name: "Instagram Likes | HQ & Old Accounts | 365 Days Refill | 200K/DAY", rate: 14.30 }
+      ],
+      youtube_views: [
+        { name: "Youtube Views | Real Traffic | Minimum 40K | Non Drop | Day 100K | Lifetime Refill | Start 0-1 Hours", rate: 231.25 },
+        { name: "Youtube Video/Shorts Views | 1-2K/DAY | Instant | No Drop | 365 Days Refill - Button Enabled", rate: 352.21 },
+        { name: "Youtube Video/Shorts Views | Monetizable | 100K/DAY | Instant | No Drop | 365 Days Refill - Button Enabled", rate: 509.10 },
+        { name: "Youtube Views | Real Traffic | Minimum 100 | Non Drop | Day 1K | Lifetime Refill | Start 0-1 Hours", rate: 253.73 },
+        { name: "Youtube Views | Real Traffic | Minimum 10K | Non Drop | Day 100K | Lifetime Refill | Start 0-1 Hours", rate: 260.16 },
+        { name: "Youtube Views | Real Traffic | Minimum 8K | Non Drop | Day 100K | Lifetime Refill | Start 0-1 Hours", rate: 308.33 },
+        { name: "Youtube Views | Real Traffic | Minimum 100 | Non Drop | Day 3K | Lifetime Refill | Start 0-1 Hours", rate: 292.27 }
+      ],
+      instagram_views: [
+        { name: "Instagram Video REELS Views | All Link | Fast Speed", rate: 3.23 },
+        { name: "Instagram Video REELS Views | REAL | Fast Speed", rate: 4.45 },
+        { name: "Instagram Video Views | All Link | Fast Speed", rate: 4.80 },
+        { name: "Instagram Video Views | All Link | SUPER FAST SPEED", rate: 5.00 },
+        { name: "Instagram Video Views | All Link | Recommended", rate: 4.30 }
+      ],
+      instagram_followers: [
+        { name: "Instagram Followers | R30% | Day 300K | All Flag Types Working", rate: 385.87 },
+        { name: "Instagram Followers | 100% Old Accounts +15 Posts | R90% | Day 400K", rate: 587.25 },
+        { name: "Instagram Followers | 100% Old Accounts +15 Posts | R365 | Day 400K", rate: 553.54 },
+        { name: "Instagram Follower Best Quality CHEAPEST", rate: 328.58 },
+        { name: "Instagram Followers | HQ Accounts | 90 Days Refill | 100K/Day - All Flag Types", rate: 493.08 },
+        { name: "Instagram Followers | HQ Accounts | 365 Days Refill | 100K/Day - All Flag Types", rate: 552.82 },
+        { name: "Instagram Followers | Old Accounts | 100K/DAY | All Flag Types", rate: 348.78 }
+      ],
+      youtube_subs: [
+        { name: "Youtube Subscribers | High Quality | Non Drop | Lifetime Refill | Instant Start | 100/200 DAY", rate: 580.40 },
+        { name: "Youtube Subscribers | High Quality | Non Drop | Lifetime Refill | Instant Start | 1/2K DAY", rate: 571.78 }
+      ],
+      telegram_members: [
+        { name: "Telegram Members | Speed: 100K/Day | Refill: 30 Days | Drop 0%", rate: 293.64 },
+        { name: "Telegram Members | Speed: 100K/Day | Refill: 60 Days | Drop 0%", rate: 328.25 }
+      ],
+      youtube_shorts: [
+        { name: "Youtube Shorts Views | 100% REAL | Lifetime Refill | Start: 0-1 Hour | Speed: 1-2K/Day | Less Drop", rate: 168.92 },
+        { name: "Youtube Shorts Views | 100% REAL | Lifetime Refill | Start: 0-1 Hour | Speed: 2-3K/Day | No Drop", rate: 230.40 },
+        { name: "Youtube Shorts Views | 100% REAL | Lifetime Refill | Start: 0-1 Hour | Speed: 5-10K/Day | No Drop", rate: 260.68 }
+      ],
+      youtube_watchtime: [
+        { name: "Watch Hours | 100% REAL | Stable | 5 min video | Speed: 1K/Day | Lifetime Refill | Non Drop", rate: 1355.98 },
+        { name: "Watch Hours | 100% REAL | Stable | 15 min video | Speed: 1K/Day | Lifetime Refill | Non Drop", rate: 1230.04 },
+        { name: "Watch Hours | 100% REAL | Stable | 30 min video | Speed: 1K/Day | Lifetime Refill | Non Drop", rate: 88.87 }
+      ]
+    };
+
+
+    const categorySelect = document.getElementById("category");
+    const serviceSelect = document.getElementById("service");
+    const quantityInput = document.getElementById("quantity");
+    const chargeInput = document.getElementById("charge");
+    const form = document.getElementById("serviceForm");
+
+    function updateCharge() {
+      const category = categorySelect.value;
+      const selectedIndex = serviceSelect.value;
+      const quantity = parseInt(quantityInput.value) || 0;
+      if (services[category] && services[category][selectedIndex]) {
+        const inflatedRate = services[category][selectedIndex].rate * 1.10;
+        const charge = (quantity / 1000) * inflatedRate;
+        chargeInput.value = `₹${charge.toFixed(2)}`;
+      }
+    }
+
+    categorySelect.addEventListener("change", () => {
+      const selected = categorySelect.value;
+      serviceSelect.innerHTML = "";
+      services[selected].forEach((service, index) => {
+        const option = document.createElement("option");
+        const inflatedRate = (service.rate * 1.10).toFixed(2);
+        option.value = index;
+        option.text = `${service.name} - ₹${inflatedRate} per 1000`;
+        serviceSelect.appendChild(option);
+      });
+      updateCharge();
+    });
+
+    serviceSelect.addEventListener("change", updateCharge);
+    quantityInput.addEventListener("input", updateCharge);
+
+    // Populate categories
+    Object.keys(services).forEach(key => {
+      const option = document.createElement("option");
+      option.value = key;
+      option.text = key.replace(/_/g, " ").toUpperCase();
+      categorySelect.appendChild(option);
+    });
+    categorySelect.dispatchEvent(new Event("change"));
+
+    form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const category = categorySelect.value;
+  const serviceIndex = serviceSelect.value;
+  const serviceObj = services[category][serviceIndex];
+  const quantity = parseInt(quantityInput.value);
+  const link = document.getElementById("link").value;
+
+  if (!category || !serviceObj || !link) {
+    alert("Please fill out all fields with valid data.");
+    return;
+  }
+
+  // Set dynamic minimum based on service name
+  const serviceName = serviceObj.name.toLowerCase();
+  const isLikesOrFollowers = serviceName.includes("like") || serviceName.includes("follower");
+  const minQuantity = isLikesOrFollowers ? 10 : 100;
+
+  if (quantity < minQuantity || quantity > 100000) {
+    alert(`Quantity must be between ${minQuantity} and 100000 for this service.`);
+    return;
+  }
+
+  const confirmation = confirm("Have you paid the amount via QR?");
+  if (!confirmation) {
+    alert("Please complete the payment before submitting.");
+    return;
+  }
+
+  const newOrder = {
+    id: Date.now(),
+    category,
+    service: serviceObj.name,
+    quantity,
+    link
+  };
+
+  const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+  existingOrders.push(newOrder);
+  localStorage.setItem("orders", JSON.stringify(existingOrders));
+
+  alert("Order submitted successfully!");
+  window.location.href = "my-orders.html";
+});
+    
+  </script>
+
+  <script>
+  document.getElementById('serviceForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const confirmation = confirm("Have you paid the amount via QR?");
+    
+    if (confirmation) {
+      // Optionally show a loading message or animation here
+      window.location.href = "my-orders.html"; // Redirect
+    } else {
+      alert("Please complete the payment before submitting.");
+    }
+  });
+</script>
+
+</body>
+</html>

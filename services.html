@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services - SMMXpert</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      min-height: 100vh;
+      color: #333;
+    }
+
+.sidebar {
+      width: 230px;
+      background-color: #1e293b;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #38bdf8;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .sidebar ul li {
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 10px;
+      display: block;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar ul li a:hover {
+      background-color: #334155;
+    }
+
+    .main {
+      flex-grow: 1;
+      padding: 30px;
+      background-color: #f9fafb;
+    }
+
+    .card {
+      background-color: white;
+      padding: 30px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      max-width: 1000px;
+      width: 100%;
+      margin: auto;
+    }
+
+    .card h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+      color: #1e293b;
+    }
+
+    .service-category {
+      margin-bottom: 30px;
+    }
+
+    .service-category h2 {
+      font-size: 20px;
+      color: #0ea5e9;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .service-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .service-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .service-list li span {
+      float: right;
+      color: #555;
+    }
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    padding: 10px 0;
+    background-color: #1e293b;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .sidebar h2 {
+    font-size: 18px;
+    margin: 0 15px;
+    color: #38bdf8;
+    flex-shrink: 0;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    list-style: none;
+  }
+
+  .sidebar ul li {
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .sidebar ul li a {
+    display: inline-block;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-right: 5px;
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .sidebar ul li a:hover {
+    background-color: #334155;
+  }
+
+  .main {
+    padding: 20px 15px;
+  }
+
+  .card {
+    padding: 25px 15px;
+  }
+
+  .order-slip,
+  .clear-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>SMMXpert</h2>
+    <ul>
+  <li><a href="new-order.html">📦 New Order</a></li>
+      <li><a href="my-orders.html">📊 My Orders</a></li>
+      <li><a href="services.html">🛠️ Services</a></li>
+      <li><a href="register-complaint.html" aria-current="page">⚠️ Register Complaint</a></li>
+    <!--  <li><a href="add-funds.html">💰 Add Funds</a></li> -->
+  </div>
+  <div class="main">
+    <div class="card">
+      <h1>Available Services</h1>
+
+      <div class="service-category">
+        <h2>Instagram Likes</h2>
+        <ul class="service-list">
+          <li>Instagram Likes | HQ & Old Accounts | No Refill | 200K/DAY <span>₹12.98</span></li>
+          <li>Instagram Likes | HQ & Old Accounts | 365 Days Refill | 200K/DAY <span>₹14.30</span></li>
+        </ul>
+      </div>
+
+      <div class="service-category">
+        <h2>Youtube Views</h2>
+        <ul class="service-list">
+          <li>Youtube Views | Real Traffic | Minimum 40K | Non Drop | Day 100K | Lifetime Refill | Start 0-1 Hours <span>₹231.25</span></li>
+          <li>Youtube Video/Shorts Views | 1-2K/DAY | Instant | No Drop | 365 Days Refill - Button Enabled <span>₹352.21</span></li>
+          <li>Youtube Video/Shorts Views | Monetizable | 100K/DAY | Instant | No Drop | 365 Days Refill - Button Enabled <span>₹509.10</span></li>
+          <li>Youtube Views | Real Traffic | Minimum 100 | Non Drop | Day 1K | Lifetime Refill | Start 0-1 Hours <span>₹253.73</span></li>
+          <li>Youtube Views | Real Traffic | Minimum 10K | Non Drop | Day 100K | Lifetime Refill | Start 0-1 Hours <span>₹260.16</span></li>
+          <li>Youtube Views | Real Traffic | Minimum 8K | Non Drop | Day 100K | Lifetime Refill | Start 0-1 Hours <span>₹308.33</span></li>
+          <li>Youtube Views | Real Traffic | Minimum 100 | Non Drop | Day 3K | Lifetime Refill | Start 0-1 Hours <span>₹292.27</span></li>
+        </ul>
+      </div>
+
+      <div class="service-category">
+        <h2>Instagram Views</h2>
+        <ul class="service-list">
+          <li>Instagram Video REELS Views | All Link | Fast Speed <span>₹3.23</span></li>
+          <li>Instagram Video REELS Views | REAL | Fast Speed <span>₹4.45</span></li>
+          <li>Instagram Video Views | All Link | Fast Speed <span>₹4.80</span></li>
+          <li>Instagram Video Views | All Link | SUPER FAST SPEED <span>₹5.00</span></li>
+          <li>Instagram Video Views | All Link | Recommended <span>₹4.30</span></li>
+        </ul>
+      </div>
+
+      <div class="service-category">
+        <h2>Instagram Followers</h2>
+        <ul class="service-list">
+          <li>Instagram Followers | R30% | Day 300K | All Flag Types Working <span>₹385.87</span></li>
+          <li>Instagram Followers | 100% Old Accounts +15 Posts | R90% | Day 400K <span>₹587.25</span></li>
+          <li>Instagram Followers | 100% Old Accounts +15 Posts | R365 | Day 400K <span>₹553.54</span></li>
+          <li>Instagram Follower Best Quality CHEAPEST <span>₹328.58</span></li>
+          <li>Instagram Followers | HQ Accounts | 90 Days Refill | 100K/Day - All Flag Types <span>₹493.08</span></li>
+          <li>Instagram Followers | HQ Accounts | 365 Days Refill | 100K/Day - All Flag Types <span>₹552.82</span></li>
+          <li>Instagram Followers | Old Accounts | 100K/DAY | All Flag Types <span>₹348.78</span></li>
+        </ul>
+      </div>
+
+      <div class="service-category">
+        <h2>Youtube Subscribers</h2>
+        <ul class="service-list">
+          <li>Youtube Subscribers | High Quality | Non Drop | Lifetime Refill | Instant Start | 100/200 DAY <span>₹580.40</span></li>
+          <li>Youtube Subscribers | High Quality | Non Drop | Lifetime Refill | Instant Start | 1/2K DAY <span>₹571.78</span></li>
+        </ul>
+      </div>
+
+      <div class="service-category">
+        <h2>Telegram Members</h2>
+        <ul class="service-list">
+          <li>Telegram Members | Speed: 100K/Day | Refill: 30 Days | Drop 0% <span>₹293.64</span></li>
+          <li>Telegram Members | Speed: 100K/Day | Refill: 60 Days | Drop 0% <span>₹328.25</span></li>
+        </ul>
+      </div>
+
+      <div class="service-category">
+        <h2>Youtube Shorts Views</h2>
+        <ul class="service-list">
+          <li>Youtube Shorts Views | 100% REAL | Lifetime Refill | Start: 0-1 Hour | Speed: 1-2K/Day | Less Drop <span>₹168.92</span></li>
+          <li>Youtube Shorts Views | 100% REAL | Lifetime Refill | Start: 0-1 Hour | Speed: 2-3K/Day | No Drop <span>₹230.40</span></li>
+          <li>Youtube Shorts Views | 100% REAL | Lifetime Refill | Start: 0-1 Hour | Speed: 5-10K/Day | No Drop <span>₹260.68</span></li>
+        </ul>
+      </div>
+
+      <div class="service-category">
+        <h2>Youtube Watch Time</h2>
+        <ul class="service-list">
+          <li>Watch Hours | 100% REAL | Stable | 5 min video | Speed: 1K/Day | Lifetime Refill | Non Drop <span>₹1355.98</span></li>
+                    <li>Watch Hours | 100% REAL | Stable | 15 min video | Speed: 1K/Day | Lifetime Refill | Non Drop <span>₹1579.23</span></li>
+          <li>Watch Hours | 100% REAL | Stable | 30 min video | Speed: 1K/Day | Lifetime Refill | Non Drop <span>₹1802.40</span></li>
+        </ul>
+      </div>
+
+     </div>
+  </div>
+</body>
+</html>
+

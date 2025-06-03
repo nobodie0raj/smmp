@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register Complaint - SMMXpert</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      min-height: 100vh;
+      color: #333;
+    }
+   .sidebar {
+      width: 230px;
+      background-color: #1e293b;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #38bdf8;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .sidebar ul li {
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 10px;
+      display: block;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar ul li a:hover {
+      background-color: #334155;
+    }
+    .main {
+      flex-grow: 1;
+      padding: 30px;
+      background-color: #f9fafb;
+    }
+
+    .card {
+      background-color: white;
+      padding: 30px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+    }
+
+    .card h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+      color: #1e293b;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .submit-btn {
+      background-color: #0ea5e9;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .submit-btn:hover {
+      background-color: #0284c7;
+    }
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    padding: 10px 0;
+    background-color: #1e293b;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .sidebar h2 {
+    font-size: 18px;
+    margin: 0 15px;
+    color: #38bdf8;
+    flex-shrink: 0;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    list-style: none;
+  }
+
+  .sidebar ul li {
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .sidebar ul li a {
+    display: inline-block;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-right: 5px;
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .sidebar ul li a:hover {
+    background-color: #334155;
+  }
+
+  .main {
+    padding: 20px 15px;
+  }
+
+  .card {
+    padding: 25px 15px;
+  }
+
+  .order-slip,
+  .clear-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <h2>SMMXpert</h2>
+    <ul>
+      <li><a href="new-order.html">📦 New Order</a></li>
+      <li><a href="my-orders.html">📊 My Orders</a></li>
+      <li><a href="services.html">🛠️ Services</a></li>
+      <li><a href="register-complaint.html" aria-current="page">⚠️ Register Complaint</a></li>
+    <!--  <li><a href="add-funds.html">💰 Add Funds</a></li> -->
+      
+    </ul>
+  </nav>
+
+  <main class="main">
+    <section class="card">
+      <h1>Register Complaint</h1>
+      <form id="complaintForm">
+        <div class="form-group">
+          <label for="orderId">Order ID</label>
+          <input type="text" id="orderId" required placeholder="Enter your order ID">
+        </div>
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="text" id="email" required placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="issue">Complaint Details</label>
+          <textarea id="issue" rows="5" required placeholder="Describe the issue..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit Complaint</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("complaintForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Your complaint has been registered successfully! Our team will contact you shortly.");
+      document.getElementById("complaintForm").reset();
+    });
+  </script>
+
+</body>
+</html>
