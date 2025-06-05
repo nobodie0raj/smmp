@@ -121,6 +121,68 @@
       background-color: #dc2626;
     }
 
+    table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table thead {
+  background-color: #1e293b;
+  color: #fff;
+}
+
+table th, table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+table tr:hover {
+  background-color: #f1f5f9;
+}
+
+table td a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+table td a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  table thead {
+    display: none;
+  }
+  table, table tbody, table tr, table td {
+    display: block;
+    width: 100%;
+  }
+  table tr {
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px;
+  }
+  table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+  table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    font-weight: bold;
+    color: #555;
+    text-align: left;
+  }
+}
+
+    
 @media (max-width: 768px) {
   body {
     flex-direction: column;
@@ -227,18 +289,16 @@
       <button class="clear-btn" onclick="clearOrders()">Clear All Orders</button>
     </section>
   </main>
-
 <script>
   const ordersList = document.getElementById("ordersList");
   const orders = JSON.parse(localStorage.getItem("orders")) || [];
 
   if (orders.length === 0) {
-    ordersList.innerHTML = "<p>No orders found.</p>";
+    ordersList.innerHTML = "<p class='no-orders'>No orders found.</p>";
   } else {
     const table = document.createElement("table");
-    table.style.width = "100%";
-    table.style.borderCollapse = "collapse";
-    table.innerHTML = `
+    const thead = document.createElement("thead");
+    thead.innerHTML = `
       <tr>
         <th>Category</th>
         <th>Service</th>
@@ -248,23 +308,28 @@
         <th>Status</th>
       </tr>
     `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
 
     orders.forEach(order => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${order.category.replace(/_/g, " ").toUpperCase()}</td>
-        <td>${order.service}</td>
-        <td>${order.quantity}</td>
-        <td><a href="${order.link}" target="_blank">View</a></td>
-        <td>${new Date(order.timestamp).toLocaleString()}</td>
-        <td style="color: red; font-weight: bold;">⚠️ Pending</td>
+        <td data-label="Category">${order.category.replace(/_/g, " ").toUpperCase()}</td>
+        <td data-label="Service">${order.service}</td>
+        <td data-label="Quantity">${order.quantity}</td>
+        <td data-label="Link"><a href="${order.link}" target="_blank">View</a></td>
+        <td data-label="Time">${new Date(order.timestamp).toLocaleString()}</td>
+        <td data-label="Status" style="color: red; font-weight: bold;">⚠️ Pending</td>
       `;
-      table.appendChild(row);
+      tbody.appendChild(row);
     });
 
+    table.appendChild(tbody);
     ordersList.appendChild(table);
   }
 </script>
+
 
 
 </body>
