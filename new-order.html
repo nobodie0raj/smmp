@@ -431,7 +431,7 @@ window.location.href = "my-orders.html";
 
   } catch (error) {
     if (error.name === "AbortError") {
-      alert("Request timed out. Please check your internet and try again.");
+      alert("Please wait. If you've already paid through QR then Refresh the page.");
     } else {
       console.error("Error submitting order:", error);
       alert(`Submission failed: ${error.message}`);
