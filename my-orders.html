@@ -228,42 +228,44 @@
     </section>
   </main>
 
+<script>
+  const ordersList = document.getElementById("ordersList");
+  const orders = JSON.parse(localStorage.getItem("orders")) || [];
 
+  if (orders.length === 0) {
+    ordersList.innerHTML = "<p>No orders found.</p>";
+  } else {
+    const table = document.createElement("table");
+    table.style.width = "100%";
+    table.style.borderCollapse = "collapse";
+    table.innerHTML = `
+      <tr>
+        <th>Category</th>
+        <th>Service</th>
+        <th>Quantity</th>
+        <th>Link</th>
+        <th>Time</th>
+        <th>Status</th>
+      </tr>
+    `;
 
-  <script>
-  const container = document.getElementById("orderList");
-
-fetch("https://smmp-backend-l4dc.onrender.com/new-order")
-    .then(res => res.json())
-    .then(orders => {
-      if (!orders.length) {
-        container.innerHTML = '<p class="no-orders">No orders placed yet.</p>';
-        return;
-      }
-
-      orders.forEach(order => {
-        const div = document.createElement("div");
-        div.className = "order-slip";
-        div.innerHTML = `
-          <h2>Order Slip</h2>
-          <p><strong>Order ID:</strong> ${order._id}</p>
-          <p><strong>Service:</strong> ${order.service}</p>
-          <p><strong>Quantity:</strong> ${order.quantity}</p>
-          <p><strong>Link:</strong> <a href="${order.link}" target="_blank">${order.link}</a></p>
-          <p><strong>Date:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
-        `;
-        container.appendChild(div);
-      });
-    })
-    .catch(error => {
-      console.error("Error fetching orders:", error);
-      container.innerHTML = '<p class="no-orders">Failed to load orders.</p>';
+    orders.forEach(order => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${order.category.replace(/_/g, " ").toUpperCase()}</td>
+        <td>${order.service}</td>
+        <td>${order.quantity}</td>
+        <td><a href="${order.link}" target="_blank">View</a></td>
+        <td>${new Date(order.timestamp).toLocaleString()}</td>
+        <td style="color: red; font-weight: bold;">⚠️ Pending</td>
+      `;
+      table.appendChild(row);
     });
 
-  function clearOrders() {
-    alert("This now works with a database. Ask admin to delete orders from backend.");
+    ordersList.appendChild(table);
   }
 </script>
+
 
 </body>
 </html>
