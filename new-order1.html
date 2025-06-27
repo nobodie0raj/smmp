@@ -194,7 +194,7 @@
     </ul>
   </div>
 
-  <div class="main">
+ <div class="main">
     <div class="card">
       <h1>Buy Your Course</h1>
       <form id="serviceForm">
@@ -212,7 +212,7 @@
         </div>
         <div class="form-group">
           <label for="quantity">Quantity</label>
-          <input type="number" id="quantity" placeholder="Enter number of licenses (1 or more)" required />
+          <input type="number" id="quantity" placeholder="Enter quantity (1 or more)" required />
         </div>
         <div class="form-group">
           <label for="charge">Total Charge</label>
@@ -220,10 +220,10 @@
         </div>
         <div class="form-group">
           <label>Scan & Pay via:</label>
-          <img src="qr.png" alt="Pay via QR Code" style="max-width: 300px; display: block; margin: 10px auto;" />
-          <p style="text-align: center; color: #1e293b; font-weight: 500;">
-            Paytm | GPay | FamPay | BharatPe | BHIM UPI<br>
-            <small style="color: #64748b;">(All-in-one QR – Just Pay and click submit button to verify)</small>
+          <img id="qrImage" src="GooglePay_QR.png" alt="QR Code" style="max-width: 300px; display: block; margin: 10px auto;" />
+          <p style="text-align: center;">
+            Paytm | GPay | BHIM UPI<br>
+            <small>(QR changes automatically based on course)</small>
           </p>
         </div>
         <button type="submit" class="submit-btn">Submit</button>
@@ -234,12 +234,12 @@
   <script>
     const services = {
       raju_courses: [
-        { name: "Viral Hack Guide", rate: 159 },
-        { name: "Prompt PDF Guide", rate: 180 },
-        { name: "1 Month Plan (No Debit Card) – 6 Videos/Day + Guide", rate: 200 },
-        { name: "1 Month Plan (With Debit Card) – Unlimited Videos + Prompt PDF", rate: 348 },
-        { name: "1.5 Year Plan (With Debit Card) – Unlimited + Prompt PDF", rate: 699 },
-        { name: "Ultimate Pack – All-in-One + Private Guidance", rate: 799 }
+        { name: "Viral Hack Guide", rate: 159, qr: "GooglePay_QR.png" },
+        { name: "Prompt PDF Guide", rate: 180, qr: "GooglePay_QR (1).png" },
+        { name: "1 Month Plan (No Debit Card)", rate: 200, qr: "GooglePay_QR (2).png" },
+        { name: "1 Month Plan (With Debit Card)", rate: 348, qr: "GooglePay_QR (3).png" },
+        { name: "1.5 Year Plan (With Debit Card)", rate: 699, qr: "GooglePay_QR (4).png" },
+        { name: "Ultimate Pack", rate: 799, qr: "GooglePay_QR (4).png" } // Reusing last QR
       ]
     };
 
@@ -252,10 +252,15 @@
       const category = categorySelect.value;
       const selectedIndex = serviceSelect.value;
       const quantity = parseInt(quantityInput.value) || 0;
+
       if (services[category] && services[category][selectedIndex]) {
-        const rate = services[category][selectedIndex].rate;
-        const charge = quantity * rate;
+        const serviceObj = services[category][selectedIndex];
+        const charge = quantity * serviceObj.rate;
         chargeInput.value = `₹${charge.toFixed(2)}`;
+
+        // update QR image
+        const qrImage = document.getElementById("qrImage");
+        qrImage.src = serviceObj.qr;
       }
     }
 
@@ -274,7 +279,7 @@
     serviceSelect.addEventListener("change", updateCharge);
     quantityInput.addEventListener("input", updateCharge);
 
-    // Initialize Category Dropdown
+    // Initialize categories
     Object.keys(services).forEach(key => {
       const option = document.createElement("option");
       option.value = key;
@@ -283,7 +288,7 @@
     });
     categorySelect.dispatchEvent(new Event("change"));
 
-    // Submit Handler
+    // Form submission
     document.getElementById('serviceForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
@@ -292,9 +297,9 @@
       submitButton.textContent = "Submitting...";
 
       try {
-        const confirmation = confirm("Have you paid the amount via QR?");
-        if (!confirmation) {
-          alert("Please complete the payment before submitting.");
+        const confirmPay = confirm("Have you paid via QR?");
+        if (!confirmPay) {
+          alert("Please pay before submitting.");
           return;
         }
 
@@ -303,18 +308,17 @@
         const quantity = parseInt(quantityInput.value);
         const link = document.getElementById("link").value.trim();
 
-        if (!link || !/^.+$/i.test(link)) {
-          alert("Please enter a valid contact (Instagram/email).");
+        if (!link) {
+          alert("Enter a valid contact.");
           return;
         }
 
         if (isNaN(quantity) || quantity <= 0) {
-          alert("Enter a valid quantity (1 or more).");
+          alert("Enter a valid quantity.");
           return;
         }
 
         const serviceObj = services[category][serviceIndex];
-
         const order = {
           service: serviceObj.name,
           link,
@@ -325,7 +329,7 @@
 
         const lastOrderKey = `${category}-${serviceIndex}-${link}-${quantity}`;
         if (sessionStorage.getItem(lastOrderKey)) {
-          alert("You've already submitted this order recently.");
+          alert("Duplicate order. Please wait before reordering.");
           return;
         }
         sessionStorage.setItem(lastOrderKey, "submitted");
@@ -343,28 +347,24 @@
         clearTimeout(timeoutId);
 
         if (!response.ok) {
-          throw new Error(`Server responded with ${response.status}`);
+          throw new Error("Server error: " + response.status);
         }
 
-        const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
-        existingOrders.push(order);
-        localStorage.setItem("orders", JSON.stringify(existingOrders));
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.push(order);
+        localStorage.setItem("orders", JSON.stringify(orders));
 
-        alert("Course access submitted successfully!");
+        alert("Order submitted successfully!");
         window.location.href = "my-orders.html";
 
       } catch (error) {
-        if (error.name === "AbortError") {
-          alert("Please wait... or try refreshing if already paid.");
-        } else {
-          console.error("Error:", error);
-          alert("Failed to submit order.");
-        }
+        alert("Error: " + error.message);
       } finally {
         submitButton.disabled = false;
         submitButton.textContent = "Submit";
       }
     });
   </script>
+
 </body>
 </html>
