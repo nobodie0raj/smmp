@@ -5,8 +5,181 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raju Courses - Dashboard</title>
   <style>
-    /* [ Same CSS Styling From Original Code ] */
-    /* Keep All Styles as-is from your original page */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      min-height: 100vh;
+      color: #333;
+    }
+
+   .sidebar {
+      width: 230px;
+      background-color: #1e293b;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #38bdf8;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .sidebar ul li {
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 10px;
+      display: block;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar ul li a:hover {
+      background-color: #334155;
+    }
+
+    .main {
+      flex-grow: 1;
+      padding: 30px;
+      background-color: #f9fafb;
+    }
+
+   .card {
+  background-color: white;
+  padding:55px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+}
+
+
+    .card h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+      color: #1e293b;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .submit-btn {
+      background-color: #0ea5e9;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .submit-btn:hover {
+      background-color: #0284c7;
+    }
+
+    @media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    padding: 10px 0;
+    background-color: #1e293b;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .sidebar h2 {
+    font-size: 18px;
+    margin: 0 15px;
+    color: #38bdf8;
+    flex-shrink: 0;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    list-style: none;
+  }
+
+  .sidebar ul li {
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .sidebar ul li a {
+    display: inline-block;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-right: 5px;
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .sidebar ul li a:hover {
+    background-color: #334155;
+  }
+
+  .main {
+    padding: 20px 15px;
+  }
+
+  .card {
+    padding: 25px 15px;
+  }
+
+  .order-slip,
+  .clear-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
   </style>
 </head>
 <body>
